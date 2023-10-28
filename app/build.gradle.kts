@@ -7,6 +7,9 @@ plugins {
 android {
     namespace = "com.aiivy782.pomodoro"
     compileSdk = 34
+    buildFeatures {
+        viewBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.aiivy782.pomodoro"
@@ -51,6 +54,7 @@ android {
 }
 
 dependencies {
+    // implementation("androidx.viewbinding:viewbinding:7.2.2")
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.x.x") // Зависимость для Kotlin Coroutines

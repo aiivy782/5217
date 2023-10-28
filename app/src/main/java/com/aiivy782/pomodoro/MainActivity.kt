@@ -2,49 +2,50 @@ package com.aiivy782.pomodoro
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.*
-import java.util.concurrent.TimeUnit
 import android.view.View
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import java.util.concurrent.TimeUnit
+import com.aiivy782.pomodoro.databinding.ActivityMainBinding
 
+    class MainActivity : AppCompatActivity() {
+        private lateinit var binding: ActivityMainBinding
+        private var isTimerRunning = false
+        var timer: CountDownTimer? = null
+        val workTimeMillis = TimeUnit.MINUTES.toMillis(52)
+        val breakTimeMillis = TimeUnit.MINUTES.toMillis(17)
+        override fun onCreate(savedInstanceState: Bundle?) {
 
-class MainActivity : AppCompatActivity() {
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-    private var isTimerRunning = false
-    private var timer: CountDownTimer? = null
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            super.onCreate(savedInstanceState)
+            setContentView(binding.root)
 
-    private val workTimeMillis = TimeUnit.MINUTES.toMillis(52)
-    private val breakTimeMillis = TimeUnit.MINUTES.toMillis(17)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main)
-
-        startPauseButton.setOnClickListener {
-            if (isTimerRunning) {
-                pauseTimer()
-            } else {
-                startTimer()
+            binding.startPauseButton.setOnClickListener {
+                if (isTimerRunning) {
+                    pauseTimer()
+                } else {
+                    startTimer()
+                }
             }
-        }
 
-        resetButton.setOnClickListener {
+        binding.resetButton.setOnClickListener {
             resetTimer()
         }
     }
 
     private fun startTimer() {
         isTimerRunning = true
-        startPauseButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pause, 0, 0, 0) // Иконка "Пауза"
-        resetButton.visibility = View.VISIBLE
-        startPauseButton.backgroundTintList = getColorStateList(R.color.material_you_accent) // Изменение цвета под Material You
+        binding.startPauseButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pause, 0, 0, 0) // Иконка "Пауза"
+        binding.resetButton.visibility = View.VISIBLE
+        binding.startPauseButton.backgroundTintList = getColorStateList(R.color.material_you_accent) // Изменение цвета под Material You
 
-        timer = object : CountDownTimer(workTimeMillis, 1000) {
+        var timer = object : CountDownTimer(workTimeMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
                 val seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60
-                timerTextView.text = String.format("%02d:%02d", minutes, seconds)
+                binding.timerTextView.text = String.format("%02d:%02d", minutes, seconds)
             }
 
             override fun onFinish() {
@@ -56,20 +57,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun pauseTimer() {
         isTimerRunning = false
-        startPauseButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.play_arrow, 0, 0, 0) // Иконка "Старт"
-        resetButton.visibility = View.VISIBLE
-        startPauseButton.backgroundTintList = getColorStateList(R.color.material_you_accent) // Изменение цвета под Material You
+        binding.startPauseButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.play_arrow, 0, 0, 0) // Иконка "Старт"
+        binding.resetButton.visibility = View.VISIBLE
+        binding.startPauseButton.backgroundTintList = getColorStateList(R.color.material_you_accent) // Изменение цвета под Material You
 
         timer?.cancel()
     }
 
     private fun resetTimer() {
         isTimerRunning = false
-        startPauseButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.stop, 0, 0, 0) // Иконка "Старт"
-        resetButton.visibility = View.GONE
-        startPauseButton.backgroundTintList = getColorStateList(R.color.material_you_accent) // Изменение цвета под Material You
+        binding.startPauseButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.stop, 0, 0, 0) // Иконка "Старт"
+        binding.resetButton.visibility = View.GONE
+        binding.startPauseButton.backgroundTintList = getColorStateList(R.color.material_you_accent) // Изменение цвета под Material You
 
         timer?.cancel()
-        timerTextView.text = "00:00"
+        binding.timerTextView.text = "00:00"
     }
 }
