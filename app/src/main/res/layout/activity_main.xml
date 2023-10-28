@@ -1,59 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:id="@+id/root">
-
-    <Button
-        android:id="@+id/startPauseButton"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:background="@color/material_you_accent"
-        android:backgroundTint="?attr/colorPrimary"
-        android:drawableLeft="@drawable/play_arrow"
-        android:elevation="2dp"
-        android:stateListAnimator="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/resetButton"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_toStartOf="@id/startPauseButton"
-        android:backgroundTint="?attr/colorPrimary"
-        android:drawableLeft="@drawable/stop"
-        android:elevation="2dp"
-        android:stateListAnimator="@null"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints" />
+    android:id="@+id/root"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/timerTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/timerTV"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/startPauseButton"
-        android:layout_centerHorizontal="true"
-        android:elevation="2dp"
-        android:text="00:00"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/timeLeft"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="72dp"
         tools:ignore="MissingConstraints" />
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/startPauseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/resetButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/startPauseButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
